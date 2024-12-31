@@ -10,3 +10,8 @@ function Book(title, author, numberOfPages, isRead) {
     return `${this.title} by ${this.author}, ${this.numberOfPages} pages, ${isRead ? "" : "not "}read`;
   }
 }
+
+function addBookToLibrary(title, author, numberOfPages, isRead) {
+  const newBook = new Book(title, author, numberOfPages, isRead);
+  myLibrary.push(newBook);
+}
