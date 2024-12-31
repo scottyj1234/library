@@ -45,3 +45,7 @@ function showLibraryInfo() {
 
   document.appendChild(libraryTable);
 }
+
+addBookToLibrary("The Hobbit", "Tolkien", 356, false);
+addBookToLibrary("Mistborn", "Brandon Sanderson", 578, true);
+addBookToLibrary("Three Body Problem", "Cixin Liu", 475, true);
