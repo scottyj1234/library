@@ -17,33 +17,26 @@ function addBookToLibrary(title, author, numberOfPages, isRead) {
 }
 
 function showLibraryInfo() {
-  const libraryTable = document.querySelector(".my-library") || document.createElement('table');
-  libraryTable.innerHTML = "";
+  const libraryTable = document.querySelector(".my-library")
+  const bookRows = libraryTable.querySelectorAll("tr.book-row");
+  for (let row of bookRows) {
+    row.remove();
+  }
+
+  bookProperties = ["title", "author", "numberOfPages", "isRead"];
 
   if (myLibrary.length < 1) return;
 
-  const bookProperties = Object.keys(myLibrary[0]);
-
-  libraryTable.className = "my-library";
-  const libraryTableHeaderRow = document.createElement('tr');
-  for (let headerText in bookProperties) {
-    const headerCell = document.createElement('th');
-    headerCell.textContent = headerText;
-    libraryTableHeaderRow.appendChild(headerCell);
-  }
-  libraryTable.appendChild(libraryTable);
-
-  for (let book in myLibrary) {
+  for (let book of myLibrary) {
     const bookRow = document.createElement('tr');
-    for (let key in bookProperties) {
+    for (let prop of bookProperties) {
       const contentCell = document.createElement('td');
-      contentCell.textContent = book[key];
+      contentCell.textContent = book[prop];
       bookRow.appendChild(contentCell)
     }
     libraryTable.appendChild(bookRow);
   }
 
-  document.appendChild(libraryTable);
 }
 
 addBookToLibrary("The Hobbit", "Tolkien", 356, false);
