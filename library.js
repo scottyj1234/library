@@ -29,6 +29,7 @@ function showLibraryInfo() {
 
   for (let book of myLibrary) {
     const bookRow = document.createElement('tr');
+    bookRow.className = 'book-row';
     for (let prop of bookProperties) {
       const contentCell = document.createElement('td');
       contentCell.textContent = book[prop];
@@ -38,6 +39,39 @@ function showLibraryInfo() {
   }
 
 }
+
+const addBookDialog = document.getElementById("add-book-dialog");
+const addBookForm = addBookDialog.querySelector("form");
+const showAddBookDialogButton = document.getElementById("show-add-book-dialog");
+const confirmBookButton = document.getElementById("add-book-confirm-button");
+const cancelAddBookDialog = addBookForm.querySelector("#cancel-book-dialog");
+
+showAddBookDialogButton.addEventListener('click', (e) => {
+  addBookDialog.showModal();
+});
+
+cancelAddBookDialog.addEventListener('click', (e) => {
+  addBookDialog.close();
+  e.preventDefault();
+})
+
+addBookForm.addEventListener('submit', (e) => {
+  const bookData = new FormData(addBookForm)
+  for (const [key, value] of bookData.entries()) {
+    console.log(key, value);
+  }
+  e.preventDefault();
+  const bookTitle = bookData.get('title');
+  const bookAuthor = bookData.get('author');
+  const bookPages = Number(bookData.get('pages'));
+  const isRead = (bookData.get('read') === 'true') ? true : false;
+  addBookToLibrary(bookTitle, bookAuthor, bookPages, isRead);
+  showLibraryInfo();
+});
+
+confirmBookButton.addEventListener('click', (e) => {
+  addBookDialog.close();
+})
 
 addBookToLibrary("The Hobbit", "Tolkien", 356, false);
 addBookToLibrary("Mistborn", "Brandon Sanderson", 578, true);
