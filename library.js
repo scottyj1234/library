@@ -11,6 +11,10 @@ function Book(title, author, numberOfPages, isRead) {
   }
 }
 
+Book.prototype.toggleReadStatus = function() {
+  this.isRead = !this.isRead;
+}
+
 function addBookToLibrary(title, author, numberOfPages, isRead) {
   const newBook = new Book(title, author, numberOfPages, isRead);
   myLibrary.push(newBook);
@@ -28,6 +32,7 @@ function showLibraryInfo() {
   if (myLibrary.length < 1) return;
 
   for (let i = 0; i < myLibrary.length; ++i) {
+    // add book data
     const bookRow = document.createElement('tr');
     bookRow.className = 'book-row';
     for (let prop of bookProperties) {
@@ -35,6 +40,8 @@ function showLibraryInfo() {
       contentCell.textContent = myLibrary[i][prop];
       bookRow.appendChild(contentCell)
     }
+
+    // add action buttons
     const actionCell = document.createElement('td');
     const deleteButton = document.createElement('button');
     deleteButton.textContent = "Remove Book"
@@ -42,6 +49,14 @@ function showLibraryInfo() {
       myLibrary.splice(i, 1);
       showLibraryInfo();
     })
+    const toggleReadButton = document.createElement('button');
+    toggleReadButton.textContent = (myLibrary[i]['isRead']) ? 'Mark unread' : 'Mark read';
+    toggleReadButton.addEventListener('click', (e) => {
+      myLibrary[i].toggleReadStatus();
+      showLibraryInfo();
+    });
+
+    actionCell.appendChild(toggleReadButton);
     actionCell.appendChild(deleteButton);
     bookRow.appendChild(actionCell);
     libraryTable.appendChild(bookRow);
