@@ -85,3 +85,4 @@ confirmBookButton.addEventListener('click', (e) => {
 addBookToLibrary("The Hobbit", "Tolkien", 356, false);
 addBookToLibrary("Mistborn", "Brandon Sanderson", 578, true);
 addBookToLibrary("Three Body Problem", "Cixin Liu", 475, true);
+showLibraryInfo();
