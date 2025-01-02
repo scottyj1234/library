@@ -27,14 +27,22 @@ function showLibraryInfo() {
 
   if (myLibrary.length < 1) return;
 
-  for (let book of myLibrary) {
+  for (let i = 0; i < myLibrary.length; ++i) {
     const bookRow = document.createElement('tr');
     bookRow.className = 'book-row';
     for (let prop of bookProperties) {
       const contentCell = document.createElement('td');
-      contentCell.textContent = book[prop];
+      contentCell.textContent = myLibrary[i][prop];
       bookRow.appendChild(contentCell)
     }
+    const actionCell = document.createElement('td');
+    const deleteButton = document.createElement('button');
+    deleteButton.addEventListener('click', (e) => {
+      myLibrary.splice(i, 1);
+      showLibraryInfo();
+    })
+    actionCell.appendChild(deleteButton);
+    bookRow.appendChild(actionCell);
     libraryTable.appendChild(bookRow);
   }
 
