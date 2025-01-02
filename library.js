@@ -6,13 +6,14 @@ function Book(title, author, numberOfPages, isRead) {
   this.numberOfPages = numberOfPages;
   this.isRead = isRead;
 
-  this.info = function() {
-    return `${this.title} by ${this.author}, ${this.numberOfPages} pages, ${isRead ? "" : "not "}read`;
-  }
 }
 
 Book.prototype.toggleReadStatus = function() {
   this.isRead = !this.isRead;
+}
+
+Book.prototype.info = function() {
+  return `${this.title} by ${this.author}, ${this.numberOfPages} pages, ${isRead ? "" : "not "}read`;
 }
 
 function addBookToLibrary(title, author, numberOfPages, isRead) {
