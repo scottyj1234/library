@@ -37,6 +37,7 @@ function showLibraryInfo() {
     }
     const actionCell = document.createElement('td');
     const deleteButton = document.createElement('button');
+    deleteButton.textContent = "Remove Book"
     deleteButton.addEventListener('click', (e) => {
       myLibrary.splice(i, 1);
       showLibraryInfo();
